@@ -23,8 +23,8 @@ mongo admin --eval "db.addUser({user: 'RootAdmin', pwd: '$PASS', roles: [ { role
 mongo admin --eval "db.addUser(	{user: 'ClusterAdmin', pwd: '$PASS', roles: [ 'clusterAdmin','userAdminAnyDatabase', 'dbAdminAnyDatabase', { role: 'readWrite', db: 'config'} ]} );"
 mongo admin --eval "db.addUser({user:'test', pwd:'test', roles:[ {role:'readWrite', db:'test'}] });"
 # clusterAdmin, 'userAdminAnyDatabase', 'dbAdminAnyDatabase'
-sleep 2
 mongo admin --eval 'db.shutdownServer();'
+sleep 1
 
 echo "=> Done!"
 touch /.mongodb_password_set

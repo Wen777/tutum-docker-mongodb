@@ -14,8 +14,11 @@ fi
 
 if [ "$AUTH" == "yes" ]; then
     export mongodb="/usr/bin/mongod --nojournal --auth --httpinterface --rest --replSet '$MONGODB_REPLICA_SET' --noprealloc --smallfiles"
+
+elif [ "$REPL_MASTER" == "false" ]; then
+		export mongodb="/usr/bin/mongod --nojournal --httpinterface --rest --replSet '$MONGODB_REPLICA_SET' --noprealloc --smallfiles"
 else
-    export mongodb='/usr/bin/mongod --nojournal --httpinterface --rest'
+    export mongodb='/usr/bin/mongod --nojournal --httpinterface --rest --noprealloc --smallfiles'
 fi
 
 
