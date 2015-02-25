@@ -18,6 +18,8 @@ VOLUME /data/db
 
 ENV AUTH yes
 
+ENV REPL_MASTER false
+
 # Add run scripts
 ADD run.sh /run.sh
 ADD set_mongodb_password.sh /set_mongodb_password.sh
