@@ -19,24 +19,27 @@ else
 fi
 
 
-if [ "$REPL_MASTER" == "true" ]; then
+if [ "$REPL_MASTER" == "true" ];
+	then
+		if [ ! -f /data/db/mongod.lock ]; then
 
-	if [ ! -f /data/db/mongod.lock ]; then
+			# exec $mongodb
+			$mongodb
 
-		exec $mongodb
+			sleep 2
 
-		sleep 2
-
-		mongo admin -u RootAdmin -p ${MONGODB_PASS} --eval "rs.initiate()"
-	else
+			exec mongo admin -u RootAdmin -p ${MONGODB_PASS} --eval "rs.initiate()"
+		else
 			export mongodb=$mongodb' --dbpath /data/db'
 			rm /data/db/mongod.lock
 			mongod --dbpath /data/db --repair && exec $mongodb
+		fi
 
-elif [ ! -f /data/db/mongod.lock ]; then
+elif [ ! -f /data/db/mongod.lock ];
+	then
     exec $mongodb
 else
-    export mongodb=$mongodb' --dbpath /data/db'
-    rm /data/db/mongod.lock
-    mongod --dbpath /data/db --repair && exec $mongodb
+  export mongodb=$mongodb' --dbpath /data/db'
+  rm /data/db/mongod.lock
+  mongod --dbpath /data/db --repair && exec $mongodb
 fi
