@@ -12,6 +12,8 @@ RUN \
 
 RUN mkdir -p /data/db
 
+WORKDIR /
+
 VOLUME /data/db
 
 ENV AUTH yes
