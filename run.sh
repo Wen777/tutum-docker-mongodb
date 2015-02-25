@@ -4,7 +4,7 @@ if [ ! -f /.mongodb_password_set ]; then
 fi
 
 if [ "$AUTH" == "yes" ]; then
-    export mongodb="/usr/bin/mongod --nojournal --auth --httpinterface --rest --replSet='$MONGODB_REPLICA_SET'"
+    export mongodb="/usr/bin/mongod --nojournal --auth --httpinterface --rest --replSet='$MONGODB_REPLICA_SET' --noprealloc --smallfiles"
 else
     export mongodb='/usr/bin/mongod --nojournal --httpinterface --rest'
 fi
