@@ -1,10 +1,6 @@
-FROM ubuntu:14.04
-MAINTAINER Fernando Mayo <fernando@tutum.co>
+FROM dockerfile/ubuntu
 
-RUN echo "deb mirror://mirrors.ubuntu.com/mirrors.txt utopic main restricted universe multiverse \n\
-deb mirror://mirrors.ubuntu.com/mirrors.txt utopic-updates main restricted universe multiverse \n\
-deb mirror://mirrors.ubuntu.com/mirrors.txt utopic-backports main restricted universe multiverse \n\
-deb mirror://mirrors.ubuntu.com/mirrors.txt utopic-security main restricted universe multiverse" > /etc/apt/sources.list.d/all-mirrors.list
+MAINTAINER wen777 <shih777577@gmail.com>
 
 RUN \
   apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10 && \
@@ -14,8 +10,8 @@ RUN \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
-
 RUN mkdir -p /data/db
+
 VOLUME /data/db
 
 ENV AUTH yes

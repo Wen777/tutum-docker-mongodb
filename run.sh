@@ -12,6 +12,9 @@ fi
 
 if [ "$REPL_MASTER" == "true" ]; then
 	exec $mongodb
+
+	sleep 2
+
 	mongo admin -u admin -p ${MONGODB_PASS} --eval "rs.initiate()"
 
 elif [ ! -f /data/db/mongod.lock ]; then
