@@ -19,8 +19,13 @@ while [[ RET -ne 0 ]]; do
 done
 
 echo "=> Creating an admin user with a ${_word} password in MongoDB"
-mongo admin --eval "db.createUser({user: 'admin', pwd: '$PASS', roles: [ 'userAdminAnyDatabase', 'dbAdminAnyDatabase', 'clusterAdmin', 'readWrite' ]});"
-mongo admin --eval "db.shutdownServer();"
+mongo admin --eval "db.addUser(\
+	{user: 'RootAdmin', pwd: '$PASS', roles: [ { role: 'root', db: 'admin' }, 'root' ]}, \
+	{user: 'ClusterAdmin', pwd: '$PASS', roles: [ 'clusterAdmin','userAdminAnyDatabase', 'dbAdminAnyDatabase', { role: 'readWrite', db: 'config' } ]},\
+	{user:'test', pwd:'test', roles:[ {role:'readWrite', db:'test'}]});"
+# clusterAdmin, 'userAdminAnyDatabase', 'dbAdminAnyDatabase'
+sleep 2
+mongo admin --eval 'db.shutdownServer();'
 
 echo "=> Done!"
 touch /.mongodb_password_set
