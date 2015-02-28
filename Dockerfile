@@ -10,7 +10,7 @@ RUN \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /data/db
+RUN mkdir -p /data/db && mkdir -p /etc/mongo_conf
 
 WORKDIR /
 
@@ -18,7 +18,7 @@ VOLUME /data/db
 
 ENV AUTH yes
 
-ENV REPL_MASTER false
+ENV KEYFILE false
 
 # Add run scripts
 ADD run.sh /run.sh
