@@ -1,5 +1,8 @@
 #!/bin/bash
-if [ ! -f /.mongodb_password_set ]; then
+if [ ! -f /.mongodb_password_set ] && [ "$AUTH" == "no" ]; then
+	echo "=> No user create && no auth"
+	touch /.mongodb_password_set
+elif [ ! -f /.mongodb_password_set ]; then
 	/set_mongodb_password.sh
 	sleep 1
 fi
