@@ -22,7 +22,6 @@ echo "=> Creating an admin user with a ${_word} password in MongoDB"
 mongo admin --eval "db.addUser({user: 'RootAdmin', pwd: '$PASS', roles: [ { role: 'root', db: 'admin'}, 'root' ]});"
 mongo admin --eval "db.addUser(	{user: 'ClusterAdmin', pwd: '$PASS', roles: [ 'clusterAdmin','userAdminAnyDatabase', 'dbAdminAnyDatabase', { role: 'readWrite', db: 'config'} ]} );"
 # mongo config --eval "db.addUser(	{user: 'ClusterAdmin', pwd: '$PASS', roles: [ 'clusterAdmin','userAdminAnyDatabase', 'dbAdminAnyDatabase', { role: 'readWrite', db: 'config'} ]} );"
-# mongo testdb --eval "db.addUser({user:'test', pwd:'test', roles:[ {role:'readWrite', db:'testdb'}] });"
 # clusterAdmin, 'userAdminAnyDatabase', 'dbAdminAnyDatabase'
 mongo admin --eval 'db.shutdownServer();'
 sleep 1
