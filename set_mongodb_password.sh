@@ -1,8 +1,8 @@
 #!/bin/bash
 
 if [ -f /.mongodb_password_set ]; then
-	echo "MongoDB password already set!"
-	exit 0
+  echo "MongoDB password already set!"
+  exit 0
 fi
 
 /usr/bin/mongod --smallfiles --nojournal &
@@ -20,8 +20,8 @@ done
 
 echo "=> Creating an admin user with a ${_word} password in MongoDB"
 mongo admin --eval "db.addUser({user: 'RootAdmin', pwd: '$PASS', roles: [ { role: 'root', db: 'admin'}, 'root' ]});"
-mongo admin --eval "db.addUser(	{user: 'ClusterAdmin', pwd: '$PASS', roles: [ 'clusterAdmin','userAdminAnyDatabase', 'dbAdminAnyDatabase', { role: 'readWrite', db: 'config'} ]} );"
-# mongo config --eval "db.addUser(	{user: 'ClusterAdmin', pwd: '$PASS', roles: [ 'clusterAdmin','userAdminAnyDatabase', 'dbAdminAnyDatabase', { role: 'readWrite', db: 'config'} ]} );"
+mongo admin --eval "db.addUser( {user: 'ClusterAdmin', pwd: '$PASS', roles: [ 'clusterAdmin','userAdminAnyDatabase', 'dbAdminAnyDatabase', { role: 'readWrite', db: 'config'} ]} );"
+# mongo config --eval "db.addUser(  {user: 'ClusterAdmin', pwd: '$PASS', roles: [ 'clusterAdmin','userAdminAnyDatabase', 'dbAdminAnyDatabase', { role: 'readWrite', db: 'config'} ]} );"
 # clusterAdmin, 'userAdminAnyDatabase', 'dbAdminAnyDatabase'
 mongo admin --eval 'db.shutdownServer();'
 sleep 1
