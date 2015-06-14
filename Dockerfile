@@ -1,4 +1,4 @@
-FROM dockerfile/ubuntu
+FROM ubuntu:14.04
 
 MAINTAINER wen777 <shih777577@gmail.com>
 
